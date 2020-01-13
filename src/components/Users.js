@@ -1,7 +1,18 @@
-import React from "react";
+import React from "react"
 
-function Users() {
-  return <div>Users</div>;
+import CreateUser from "./CreateUser"
+import User from "./User"
+
+function Users({ users = [] }) {
+  return (
+    <section className="Users">
+      <h2>Users</h2>
+      <CreateUser />
+      {users.map(user => (
+        <User />
+      ))}
+    </section>
+  )
 }
 
-export default Users;
+export default Users
