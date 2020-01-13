@@ -1,7 +1,48 @@
-import React from "react";
+import React, { useState } from "react"
 
-function CreateList() {
-  return <div>Create List</div>;
+function CreateList(props) {
+  const [title, setTitle] = useState("")
+
+  const isValid = () => {
+    return !!title
+  }
+
+  const isInvalid = () => {
+    return !isValid()
+  }
+
+  // form submit handler
+  const handleSubmit = event => {
+    event.preventDefault()
+
+    if (props.onCreateList) {
+      props.onCreateList({
+        title
+      })
+    }
+
+    setTitle("")
+  }
+
+  return (
+    <form className="CreateList" onSubmit={handleSubmit}>
+      <input
+        className="CreateList-title"
+        id="CreateList-title"
+        name="title"
+        onChange={event => setTitle(event.target.value)}
+        placeholder="New List Title"
+        value={title}
+      />
+      <input
+        className="CreateList-submit"
+        type="submit"
+        disabled={isInvalid()}
+      />
+    </form>
+  )
 }
 
-export default CreateList;
+// add function methods
+
+export default CreateList
