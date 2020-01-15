@@ -15,8 +15,8 @@ function CreateList(props) {
   const handleSubmit = event => {
     event.preventDefault()
 
-    if (props.onCreateList) {
-      props.onCreateList({
+    if (props.createList) {
+      props.createList({
         title
       })
     }
