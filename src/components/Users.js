@@ -1,15 +1,16 @@
 import React from "react"
 
-import CreateUser from "./CreateUser"
-import User from "./User"
+import CreateUserContainer from "../containers/CreateUserContainer"
+import UserContainer from "../containers/UserContainer"
 
 function Users({ users = [] }) {
   return (
     <section className="Users">
       <h2>Users</h2>
-      <CreateUser />
-      {users.map(user => (
-        <User />
+      <CreateUserContainer />
+
+      {users.map(userId => (
+        <UserContainer userId={userId} key={userId} />
       ))}
     </section>
   )
