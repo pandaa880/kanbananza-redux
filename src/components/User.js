@@ -3,9 +3,9 @@ import md5 from "md5"
 
 // create profile image URL
 const createProfileImageURL = ({ email }) => {
-  const hash = md5(email.trim())
+  const hash = md5(email.trim().toLowerCase())
 
-  return `https://wwww.gravatar.com/avatar/${hash}`
+  return `https://www.gravatar.com/avatar/${hash}`
 }
 
 function User({ user }) {
