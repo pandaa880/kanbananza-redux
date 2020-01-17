@@ -17,8 +17,8 @@ function CreateUser(props) {
   const handleSubmit = event => {
     event.preventDefault()
 
-    if (props.onCreateUser) {
-      props.onCreateUser({
+    if (props.createUser) {
+      props.createUser({
         name,
         email
       })
