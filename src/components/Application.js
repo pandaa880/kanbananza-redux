@@ -1,13 +1,13 @@
 import React from "react"
 
-import Users from "./Users"
+import UsersContainer from "../containers/UsersContainer"
 import CreateListContainer from "../containers/CreateListContainer"
 import ListsContainer from "../containers/ListsContainer"
 
 function Application() {
   return (
     <main className="Application">
-      <Users />
+      <UsersContainer />
       <section>
         <CreateListContainer />
         <ListsContainer />
