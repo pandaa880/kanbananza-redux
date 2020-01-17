@@ -16,7 +16,7 @@ export const lists = {
 }
 
 export const users = {
-  entities: normalizedUsers.entities.lists,
+  entities: normalizedUsers.entities.users,
   ids: normalizedUsers.result
 }
 
