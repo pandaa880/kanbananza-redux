@@ -1,4 +1,5 @@
 export const CREATE_CARD = "CREATE_CARD"
+export const MOVE_CARD_TO_LIST = "MOVE_CARD"
 
 // card reducer function abstraction
 const defaultCardData = {
@@ -22,6 +23,23 @@ export const createCard = (listId, cardData) => {
       card,
       listId,
       cardId
+    }
+  }
+}
+
+export const moveCardToList = (
+  cardId,
+  listId,
+  currentlySelectedListId,
+  lists
+) => {
+  return {
+    type: MOVE_CARD_TO_LIST,
+    payload: {
+      cardId,
+      currentListId: listId,
+      newListId: currentlySelectedListId,
+      list: lists
     }
   }
 }
