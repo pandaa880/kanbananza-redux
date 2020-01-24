@@ -1,7 +1,8 @@
 import React from "react"
 import MoveCardToListContainer from "../containers/MoveCardToListContainer"
+import RemoveCardFromListContainer from "../containers/RemoveCardFromListContainer"
 
-function Card({ card = {}, listId, lists }) {
+function Card({ card = {}, listId, lists, cards }) {
   return (
     <article className="Card">
       <h3>{card.title}</h3>
@@ -11,6 +12,12 @@ function Card({ card = {}, listId, lists }) {
         cardId={card.id}
         listId={listId}
         lists={lists}
+      />
+      <RemoveCardFromListContainer
+        cardId={card.id}
+        listId={listId}
+        lists={lists}
+        cards={cards}
       />
     </article>
   )
