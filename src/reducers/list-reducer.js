@@ -4,7 +4,11 @@ import { lists as defaultLists } from "../normalized-state"
 
 // card actions
 import { CREATE_LIST } from "../actions/list-actions"
-import { CREATE_CARD, MOVE_CARD_TO_LIST } from "../actions/card-actions"
+import {
+  CREATE_CARD,
+  MOVE_CARD_TO_LIST,
+  REMOVE_CARD_FROM_LIST
+} from "../actions/card-actions"
 
 const listReducer = (lists = defaultLists, action) => {
   const actionType = action.type
@@ -74,6 +78,35 @@ const listReducer = (lists = defaultLists, action) => {
     return {
       entities: { ...list.entities },
       ids: list.ids
+    }
+  }
+
+  /**
+   * remove card from list
+   */
+  if (actionType === REMOVE_CARD_FROM_LIST) {
+    const { listId, lists, cardId } = actionPayload
+
+    // make a copy of lists entities and ids
+    const updatedListOfCards = [...lists.entities[listId].cards]
+
+    // find the list and remove card reference from that list
+    const cardIndexInList = updatedListOfCards.findIndex(id => id === cardId)
+
+    if (cardIndexInList >= 0) {
+      updatedListOfCards.splice(cardIndexInList, 1)
+    }
+
+    // define new card entities
+    const updatedList = {
+      ...lists.entities[listId],
+      cards: updatedListOfCards
+    }
+
+    // return updated data
+    return {
+      entities: { ...lists.entities, [listId]: updatedList },
+      ids: lists.ids
     }
   }
 
