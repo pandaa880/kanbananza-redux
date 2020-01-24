@@ -1,6 +1,6 @@
 import { cards as defaultCards } from "../normalized-state"
 
-import { CREATE_CARD } from "../actions/card-actions"
+import { CREATE_CARD, REMOVE_CARD_FROM_LIST } from "../actions/card-actions"
 
 const cardReducer = (cards = defaultCards, action) => {
   const actionType = action.type
@@ -12,6 +12,30 @@ const cardReducer = (cards = defaultCards, action) => {
     return {
       entities: { ...cards.entities, [cardId]: card },
       ids: [...cards.ids, cardId]
+    }
+  }
+
+  if (actionType === REMOVE_CARD_FROM_LIST) {
+    const { cardId, cards } = actionPayload
+
+    const newCardEntities = { ...cards.entities }
+    const newCardIds = [...cards.ids]
+    // delete newCardEntities[cardId]
+
+    // find the index of cardid from ids array and delete it
+    const cardIndex = newCardIds.findIndex(card => card === cardId)
+
+    if (cardIndex >= 0) {
+      newCardIds.splice(cardIndex, 1)
+    }
+
+    // delete card from the entities
+    delete newCardEntities[cardId]
+
+    // return the new state
+    return {
+      entities: newCardEntities,
+      ids: newCardIds
     }
   }
   return cards
