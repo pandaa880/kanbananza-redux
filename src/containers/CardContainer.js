@@ -5,7 +5,8 @@ import Card from "../components/Card"
 const mapStateToProps = (state, ownProps) => {
   return {
     card: state.cards.entities[ownProps.cardId],
-    lists: state.lists
+    lists: state.lists,
+    cards: state.cards
   }
 }
 
