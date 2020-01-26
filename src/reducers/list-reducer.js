@@ -3,7 +3,7 @@ import set from "lodash/fp/set"
 import { lists as defaultLists } from "../normalized-state"
 
 // card actions
-import { CREATE_LIST } from "../actions/list-actions"
+import { CREATE_LIST, REMOVE_LIST } from "../actions/list-actions"
 import {
   CREATE_CARD,
   MOVE_CARD_TO_LIST,
@@ -107,6 +107,29 @@ const listReducer = (lists = defaultLists, action) => {
     return {
       entities: { ...lists.entities, [listId]: updatedList },
       ids: lists.ids
+    }
+  }
+
+  // remove list
+  if (actionType === REMOVE_LIST) {
+    const { listId, lists } = actionPayload
+
+    const newEntities = { ...lists.entities }
+    const newIds = [...lists.ids]
+
+    // delete the list using listId
+    delete newEntities[listId]
+
+    // find the list id from array of ids using listId from param
+    const listIdIndex = newIds.findIndex(id => id === listId)
+
+    if (listIdIndex >= 0) {
+      newIds.splice(listIdIndex, 1)
+    }
+
+    return {
+      entities: newEntities,
+      ids: newIds
     }
   }
 
