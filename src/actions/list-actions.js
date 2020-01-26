@@ -1,4 +1,5 @@
 export const CREATE_LIST = "CREATE_LIST"
+export const REMOVE_LIST = "REMOVE_LIST"
 
 // list reducer - create list function
 const defaultListData = {
@@ -20,6 +21,16 @@ export const createList = listData => {
     payload: {
       listId,
       list
+    }
+  }
+}
+
+export const removeList = (listId, lists) => {
+  return {
+    type: REMOVE_LIST,
+    payload: {
+      listId,
+      lists
     }
   }
 }
